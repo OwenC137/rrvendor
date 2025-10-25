@@ -3,7 +3,7 @@ CREATE TABLE `sales` (
 	`name` text NOT NULL,
 	`amount` real NOT NULL,
 	`unit_price` text,
-	`quantity` real NOT NULL,
+	`quantity` real,
 	`client` text,
 	`created_at` integer DEFAULT (unixepoch()) NOT NULL
 );
