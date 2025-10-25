@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as Updates from 'expo-updates';
+import Constants from 'expo-constants';
 
 export function useOTAUpdates() {
   const [isChecking, setIsChecking] = useState(false);
@@ -13,8 +14,10 @@ export function useOTAUpdates() {
 
   const checkForUpdates = async () => {
     try {
-      // Solo funciona en builds, no en development (Expo Go)
-      if (Updates.isEnabled) {
+      // Solo funciona en builds standalone, no en Expo Go
+      const isExpoGo = Constants.appOwnership === 'expo';
+
+      if (!isExpoGo && Updates.isEnabled) {
         setIsChecking(true);
         const update = await Updates.checkForUpdateAsync();
 
